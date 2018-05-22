@@ -1,0 +1,21 @@
+{
+  "name": "vue-pp",
+  "authors": [
+    "Pepe Valdivia <<jvaldivia@softweb.pe>>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
+  }
+}
