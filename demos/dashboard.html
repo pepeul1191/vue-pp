@@ -21,6 +21,7 @@
     const STATICS_URL  = "http://localhost:9090/";
     const MODULOS_JSON = JSON.parse('[{"url":"accesos\/","nombre":"Accesos"},{"url":"administracion\/","nombre":"Administración"}]');
     const ITEMS_JSON = JSON.parse('[{"subtitulo":"Opciones","items":[{"url":"administracion#\/evento","item":"Gestión de Eventos"},{"url":"administracion#\/alumno","item":"Gestión de Alumnos"},{"url":"administracion#\/empleado","item":"Gestión de Empleados"},{"url":"administracion#\/externo","item":"Gestión de Externos"}]}]');
+    const USER = {nombre: "Pepe Valdivia", usuario: "pips",};
     const DATA = JSON.parse('{"modulo":"Accesos"}');
     const CSRF = "";
   </script>
@@ -30,28 +31,15 @@
   <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="../bower_components/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
-  Vue.component("header-menu", {
+  Vue.component('header-menu', {
     props:  {
-      url: {
-        type: String,
-        required: true
-      },
-      clase: {
-        type: String,
-        required: false
-      },
-      text: {
-        type: String,
-        required: true
-      },
-      base_url:{
-        type: String,
-        required: false,
-        default: BASE_URL
-      },
+      url: { type: String, required: true },
+      clases: { type: String,required: false },
+      text: { type: String, required: true },
+      base_url:{ type: String, required: false, default: ''},
     },
     template: `
-      <a v-bind:href="base_url + url" v-bind:class="clase">{{text}}</a>
+      <a v-bind:href="base_url + url" v-bind:class="[clases,]">{{text}}</a>
     `
   })
   </script>
@@ -59,22 +47,36 @@
 <body>
   <div id="app">
     <header>
+      <header-menu
+        v-for = "item in items"
+        v-bind:base_url = base_url
+        v-bind:url = item.url
+        v-bind:text = item.text
+        v-bind:clases = item.clases
+      ></header-menu>
+      <!--
+      EQUIVALENTE
       <header-menu url="" text="Inicio"></header-menu>
       <header-menu url="ayuda" text="Ayuda"></header-menu>
       <header-menu url="login/ver" clase="pull-right" text="Pepe Valdivia"></header-menu>
       <header-menu url="login/cerrar" clase="pull-right" text="Cerrar Sesión"></header-menu>
+      -->
     </header>
   </div>
   <!-- Librerías de Terceros-->
   <!-- JS Propio -->
   <script type="text/javascript">
-    new Vue({el: "header",
-      data() {
-      return {
+    new Vue({el: 'header',
+      data: {
         base_url: BASE_URL,
+        items: [
+          {url: '', text: 'Inicio', clases: '',},
+          {url: 'ayuda', text: 'Ayuda', clases: '',},
+          {url: 'login/ver', text: 'Pepe Valdivia', clases: 'pull-right',},
+          {url: 'login/cerrar', text: 'Ayuda', clases: 'pull-right',},
+        ],
       }
-    }
-  });
+    });
   </script>
 </body>
 </html>
