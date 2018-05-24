@@ -30,19 +30,8 @@
   <script type="text/javascript" src="../bower_components/vue-router/dist/vue-router.js"></script>
   <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="../bower_components/axios/dist/axios.min.js"></script>
-  <script type="text/javascript">
-  Vue.component('header-menu', {
-    props:  {
-      url: { type: String, required: true },
-      clases: { type: String,required: false },
-      text: { type: String, required: true },
-      base_url:{ type: String, required: false, default: ''},
-    },
-    template: `
-      <a v-bind:href="base_url + url" v-bind:class="[clases,]">{{text}}</a>
-    `
-  })
-  </script>
+  <!-- Components -->
+  <script type="text/javascript" src="../components/header.js"></script>
 </head>
 <body>
   <div id="app">
