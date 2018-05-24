@@ -10,9 +10,16 @@
   <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <!-- CSS Propio -->
   <!-- JS de cabecera -->
+  <script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../bower_components/vue-router/dist/vue-router.js"></script>
+  <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../bower_components/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
     const BASE_URL = "http://localhost:9090/";
     const CSRF = "";
+    Vue.component('todo-item', {
+      template: '<li>This is a todo</li>'
+    })
   </script>
 </head>
 <body class="container">
@@ -26,12 +33,11 @@
     </span>
     <br>
     {{ message }}
+    <ol>
+      <!-- Create an instance of the todo-item component -->
+      <todo-item></todo-item>
+    </ol>
   </div>
-  <!-- Librerías de Terceros-->
-  <script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
-  <script type="text/javascript" src="../bower_components/vue-router/dist/vue-router.js"></script>
-  <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="../bower_components/axios/dist/axios.min.js"></script>
   <!-- JS Propio -->
   <script type="text/javascript">
     var app = new Vue({
@@ -46,6 +52,7 @@
         message: 'You loaded this page on ' + new Date().toLocaleString()
       }
     });
+
     axios.get(BASE_URL + "departamento/listar")
     .then(function (response) {
       console.log(response);

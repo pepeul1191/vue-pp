@@ -16,6 +16,14 @@
    margin-top: 0px;
   }
   </style>
+  <script type="text/javascript">
+    const BASE_URL = "http://localhost:9090/";
+    const STATICS_URL  = "http://localhost:9090/";
+    const MODULOS_JSON = JSON.parse('[{"url":"accesos\/","nombre":"Accesos"},{"url":"administracion\/","nombre":"Administración"}]');
+    const ITEMS_JSON = JSON.parse('[{"subtitulo":"Opciones","items":[{"url":"administracion#\/evento","item":"Gestión de Eventos"},{"url":"administracion#\/alumno","item":"Gestión de Alumnos"},{"url":"administracion#\/empleado","item":"Gestión de Empleados"},{"url":"administracion#\/externo","item":"Gestión de Externos"}]}]');
+    const DATA = JSON.parse('{"modulo":"Accesos"}');
+    const CSRF = "";
+  </script>
   <!-- Librerías de Terceros-->
   <script type="text/javascript" src="../bower_components/vue/dist/vue.js"></script>
   <script type="text/javascript" src="../bower_components/vue-router/dist/vue-router.js"></script>
@@ -23,36 +31,50 @@
   <script type="text/javascript" src="../bower_components/axios/dist/axios.min.js"></script>
   <script type="text/javascript">
   Vue.component("header-menu", {
-    data: function () {
-      return {
-        count: 0
-      }
+    props:  {
+      url: {
+        type: String,
+        required: true
+      },
+      clase: {
+        type: String,
+        required: false
+      },
+      text: {
+        type: String,
+        required: true
+      },
+      base_url:{
+        type: String,
+        required: false,
+        default: BASE_URL
+      },
     },
     template: `
-      <a href="">Inicio</a>
-
+      <a v-bind:href="base_url + url" v-bind:class="clase">{{text}}</a>
     `
   })
   </script>
 </head>
 <body>
-  <!--
-  <header>
-    <a href="{{BASE_URL}}">Inicio</a>
-    <a href="{{BASE_URL}}ayuda">Ayuda</a>
-    <a href="{{BASE_URL}}login/ver" class="pull-right">Pepe Valdivia</a>
-    <a href="{{BASE_URL}}login/cerrar" class="pull-right">Cerrar Sesión</a>
-  </header>
-  -->
   <div id="app">
     <header>
-      <header-menu></header-menu>
+      <header-menu url="" text="Inicio"></header-menu>
+      <header-menu url="ayuda" text="Ayuda"></header-menu>
+      <header-menu url="login/ver" clase="pull-right" text="Pepe Valdivia"></header-menu>
+      <header-menu url="login/cerrar" clase="pull-right" text="Cerrar Sesión"></header-menu>
     </header>
   </div>
   <!-- Librerías de Terceros-->
   <!-- JS Propio -->
   <script type="text/javascript">
-    new Vue({el: "header"});
+    new Vue({el: "header",
+      data() {
+      return {
+        base_url: BASE_URL,
+      }
+    }
+  });
   </script>
 </body>
 </html>

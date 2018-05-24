@@ -3,3 +3,4 @@
 + https://vuejs.org/v2/guide/ssr.html
 + https://vuejs.org/v2/guide/
 + https://github.com/axios/axios
++ http://bttrlazyloading.julienrenaux.fr/
