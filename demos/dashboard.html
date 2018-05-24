@@ -31,7 +31,8 @@
   <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="../bower_components/axios/dist/axios.min.js"></script>
   <!-- Components -->
-  <script type="text/javascript" src="../components/header.js"></script>
+  <script type="text/javascript" src="../components/header-menu.js"></script>
+  <script type="text/javascript" src="../components/nav-modulo.js"></script>
 </head>
 <body>
   <div id="app">
@@ -43,14 +44,17 @@
         v-bind:text = item.text
         v-bind:clases = item.clases
       ></header-menu>
-      <!--
-      EQUIVALENTE
-      <header-menu url="" text="Inicio"></header-menu>
-      <header-menu url="ayuda" text="Ayuda"></header-menu>
-      <header-menu url="login/ver" clase="pull-right" text="Pepe Valdivia"></header-menu>
-      <header-menu url="login/cerrar" clase="pull-right" text="Cerrar Sesión"></header-menu>
-      -->
     </header>
+    <nav>
+      <h1><i class="fa fa-umbrella h1" aria-hidden="true"></i>Nombre de Aplicación</h1>
+      <nav-modulo
+        v-for = "modulo in modulos"
+        v-bind:base_url = base_url
+        v-bind:url = modulo.url
+        v-bind:nombre = modulo.nombre
+        v-bind:active = modulo_activo
+      ></nav-modulo>
+    </nav>
   </div>
   <!-- Librerías de Terceros-->
   <!-- JS Propio -->
@@ -64,6 +68,13 @@
           {url: 'login/ver', text: 'Pepe Valdivia', clases: 'pull-right',},
           {url: 'login/cerrar', text: 'Ayuda', clases: 'pull-right',},
         ],
+      }
+    });
+    new Vue({el: 'nav',
+      data: {
+        base_url: BASE_URL,
+        modulos: MODULOS_JSON,
+        modulo_activo: DATA.modulo,
       }
     });
   </script>
